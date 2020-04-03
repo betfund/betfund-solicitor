@@ -1,4 +1,4 @@
-"""Unit tests for `lines.snapshot` modules."""
+"""Unit tests for `betfund_solicitor.Message` modules."""
 import json
 import pytest
 
@@ -50,7 +50,7 @@ class TestBasicMessage(TestCase):
         """Unit test for `Message.__init__(...)` success."""
         pass
 
-    def test_ses_send_email_jsonschema(self):
+    def test_ses_send_email_json_schema(self):
         """Unit test for `Message.ses_send_email_payload` success."""
 
         # use `jsonschema.validate` to assert that payload has proper typing

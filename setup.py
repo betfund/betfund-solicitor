@@ -23,7 +23,12 @@ setup(
     python_requires=">=3.7",
     keywords="betfund",
     packages=find_packages(),
+    install_requires=[
+        "jsonschema"
+    ],
     tests_require=[
-        "jsonschema",
+        "black",
+        "pylint",
+        "pytest"
     ]
 )
