@@ -9,7 +9,3 @@ tests:
 .PHONY: lint
 lint:
 	pylint betfund_solicitor
-
-.PHONY: flake
-flake:
-	flake8 betfund_solicitor
