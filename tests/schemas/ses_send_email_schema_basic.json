@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "Source": {
+      "type": "string"
+    },
+    "Destination": {
+      "type": "object",
+      "properties": {
+        "ToAddresses": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "CcAddresses": {
+          "type": "array",
+          "items": {}
+        },
+        "BccAddresses": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "ToAddresses",
+        "CcAddresses",
+        "BccAddresses"
+      ]
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "Subject": {
+          "type": "object",
+          "properties": {
+            "Data": {
+              "type": "string"
+            },
+            "Charset": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Data",
+            "Charset"
+          ]
+        },
+        "Body": {
+          "type": "object",
+          "properties": {
+            "Text": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "string"
+                },
+                "Charset": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Data",
+                "Charset"
+              ]
+            },
+            "Html": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "string"
+                },
+                "Charset": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "Data",
+                "Charset"
+              ]
+            }
+          },
+          "required": [
+            "Text",
+            "Html"
+          ]
+        }
+      },
+      "required": [
+        "Subject",
+        "Body"
+      ]
+    },
+    "ReplyToAddresses": {
+      "type": "array",
+      "items": {}
+    },
+    "Tags": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "required": [
+    "Source",
+    "Destination",
+    "Message",
+    "ReplyToAddresses",
+    "Tags"
+  ]
+}
