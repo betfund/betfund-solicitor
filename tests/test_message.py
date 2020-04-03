@@ -21,7 +21,7 @@ class TestBasicMessage(TestCase):
         self.message = Message(
             reason='test',
             sender='mitchbregs@gmail.com',
-            to='mitchbregs@gmail.com',
+            to='leonkozlowski@gmail.com',
             subject='SubjectTest',
             body_text='TextTest',
             body_html=''
@@ -41,7 +41,7 @@ class TestBasicMessage(TestCase):
         """Unit test for `Message.__init__(...)` success."""
         assert self.message.reason == 'test'
         assert self.message.sender == 'mitchbregs@gmail.com'
-        assert self.message.to == ['mitchbregs@gmail.com']
+        assert self.message.to == ['leonkozlowski@gmail.com']
         assert self.message.subject == 'SubjectTest'
         assert self.message.body_text == 'TextTest'
         assert self.message.body_html == ''
