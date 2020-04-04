@@ -10,7 +10,7 @@ class Message:
     ----------
     reason : str
         Explanation in simple words for email. Can be a code in future.
-            For logging purposes.
+        For logging purposes.
     sender : str
         The email address that is sending the email.
     to : list
