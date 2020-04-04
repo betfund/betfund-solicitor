@@ -81,9 +81,7 @@ class Message:
             },
             "Message": {
                 "Subject": {"Data": self.subject, "Charset": self.charset},
-                "Body": {
-                    "Html": {"Data": self.body_html, "Charset": self.charset},
-                },
+                "Body": {"Html": {"Data": self.body_html, "Charset": self.charset},},
             },
             "ReplyToAddresses": self.reply_to,
             "Tags": self.tags,

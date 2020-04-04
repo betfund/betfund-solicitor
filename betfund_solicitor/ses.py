@@ -1,35 +1,15 @@
-# See: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
+"""
+Amazon Simple Email Service (SES) wrapper class.
+
+Example:
+https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
+"""
 
 from boto3 import client
 from botocore.exceptions import ClientError
 
 from betfund_solicitor import Message
-
-AWS_REGIONS = {
-    "us-east-1",
-    "us-east-2",
-    "us-west-1",
-    "us-west-2",
-    "ap-east-1",
-    "ap-south-1",
-    "ap-northeast-3",
-    "ap-northeast-2",
-    "ap-southeast-1",
-    "ap-southeast-2",
-    "ap-northeast-1",
-    "ca-central-1",
-    "cn-north-1",
-    "cn-northwest-1",
-    "eu-central-1",
-    "eu-west-1",
-    "eu-west-2",
-    "eu-west-3",
-    "eu-north-1",
-    "me-south-1",
-    "sa-east-1",
-    "us-gov-east-1",
-    "us-gov-west-1"
-}
+from betfund_solicitor.constants import AWS_REGIONS
 
 
 class SimpleEmailService:
@@ -39,29 +19,40 @@ class SimpleEmailService:
 
     Attributes
     ----------
+    client : `boto3.client`
+        Client to connect to Amazon Web Services.
     message : `betfund_solicitor.Message`
-        Message object encapsulating all relevant configuration for the
-        email to be sent.
-    aws_access_key : str
-        AWS Access Key ID from AWS management console.
-    aws_secret_key : str
-        AWS Secret Access Key from AWS management console.
-    aws_region : str:
-        AWS Region used for Amazon SES.
+        Message object handling encapsulation for desired email.
     """
+
     def __init__(
         self,
         message: Message,
         aws_access_key: str,
         aws_secret_key: str,
-        aws_region: str = "us-east-1"
+        aws_region: str = "us-east-1",
     ):
-        assert aws_region in AWS_REGIONS, 'not a valid `aws_region`'
+        """SimpleEmailService initialization.
+
+        Params
+        ------
+        message : `betfund_solicitor.Message`
+            Message object encapsulating all relevant configuration for the
+            email to be sent.
+        aws_access_key : str
+            AWS Access Key ID from AWS management console.
+        aws_secret_key : str
+            AWS Secret Access Key from AWS management console.
+        aws_region : str:
+            AWS Region used for Amazon SES.
+        """
+        if not aws_region in AWS_REGIONS:
+            raise ValueError(f"`{aws_region}` not a valid region")
         self.client = client(
-            'ses',
+            "ses",
             aws_access_key_id=aws_access_key,
             aws_secret_access_key=aws_secret_key,
-            region_name=aws_region
+            region_name=aws_region,
         )
         self.message = message
 
@@ -69,15 +60,22 @@ class SimpleEmailService:
         return f"<SimpleEmailService ({self.message})>"
 
     def send_email(self):
-        """Sends email using AWS `boto3.client.send_email` for SES."""
+        """Sends email using AWS `boto3.client.send_email` for SES.
+
+        Returns
+        -------
+        dict
+            JSON response from `boto3.client.send_email` representing
+            successful email send or notifying payload errors.
+        """
 
         payload = self.message.ses_send_email_payload
 
         try:
             # try to send the email
             response = self.client.send_email(**payload)
-        except ClientError as e:
-            # raise error on connectivity or payload failure
-            raise e
+        except ClientError as error:
+            # raise error on client connectivity failure
+            raise error
 
         return response

@@ -23,8 +23,7 @@ class TestBasicMessage(TestCase):
             sender="mitchbregs@gmail.com",
             to="leonkozlowski@gmail.com",
             subject="SubjectTest",
-            body_text="TextTest",
-            body_html="",
+            body_html="TextTest",
         )
 
         # register basic payload
@@ -43,8 +42,7 @@ class TestBasicMessage(TestCase):
         assert self.message.sender == "mitchbregs@gmail.com"
         assert self.message.to == ["leonkozlowski@gmail.com"]
         assert self.message.subject == "SubjectTest"
-        assert self.message.body_text == "TextTest"
-        assert self.message.body_html == ""
+        assert self.message.body_html == "TextTest"
 
     def test_ses_send_email_payload(self):
         """Unit test for `Message.__init__(...)` success."""
