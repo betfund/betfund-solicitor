@@ -17,8 +17,6 @@ class Message:
         The destination for this email.
     subject : str
         The subject of the message.
-    body_text : str
-        The message body in plaintext.
     body_html : str
         The message body in HTML.
     attachments : list
@@ -42,7 +40,6 @@ class Message:
         sender: str,
         to: Union[str, List[str]],
         subject: str,
-        body_text: str,
         body_html: str,
         attachments: Union[str, List[str]] = [],
         cc: Union[str, List[str]] = [],
@@ -56,7 +53,6 @@ class Message:
         self.sender = sender
         self.to = to if isinstance(to, list) else [to]
         self.subject = subject
-        self.body_text = body_text
         self.body_html = body_html
         self.attachments = (
             attachments if isinstance(attachments, list) else [attachments]
@@ -85,10 +81,7 @@ class Message:
             },
             "Message": {
                 "Subject": {"Data": self.subject, "Charset": self.charset},
-                "Body": {
-                    "Text": {"Data": self.body_text, "Charset": self.charset},
-                    "Html": {"Data": self.body_html, "Charset": self.charset},
-                },
+                "Body": {"Html": {"Data": self.body_html, "Charset": self.charset},},
             },
             "ReplyToAddresses": self.reply_to,
             "Tags": self.tags,

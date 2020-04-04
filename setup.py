@@ -24,6 +24,7 @@ setup(
     keywords="betfund",
     packages=find_packages(),
     install_requires=[
+        "boto3",
         "jsonschema"
     ],
     tests_require=[
