@@ -1,4 +1,7 @@
 # betfund-solicitor
+
+![](https://github.com/betfund/betfund-solicitor/workflows/Befund%20Solicitor/badge.svg)
+
 Workflow to send automated emails asking for favorite line votes.
 
 ## Installation
