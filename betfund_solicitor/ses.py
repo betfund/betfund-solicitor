@@ -67,6 +67,11 @@ class SimpleEmailService:
         dict
             JSON response from `boto3.client.send_email` representing
             successful email send or notifying payload errors.
+
+        Raises
+        -------
+        `boto3.exceptions.ClientError`
+            Raised when issues connecting to AWS SDK client occur.
         """
 
         payload = self.message.ses_send_email_payload
