@@ -26,14 +26,24 @@ class TestBasicMessage(TestCase):
             body_html="TextTest",
         )
 
+        ## Amazon SES
         # register basic payload
         self.ses_send_email_payload = rjson(
             "tests/payloads/ses_send_email_payload_basic.json"
         )
-
         # register basic jsonschema
         self.ses_send_email_schema = rjson(
             "tests/schemas/ses_send_email_schema_basic.json"
+        )
+
+        ## SendGrid
+        # register basic payload
+        self.sendgrid_send_payload = rjson(
+            "tests/payloads/sendgrid_send_payload_basic.json"
+        )
+        # register basic jsonschema
+        self.sendgrid_send_schema = rjson(
+            "tests/schemas/sendgrid_send_schema_basic.json"
         )
 
     def test_constructor(self):
@@ -44,15 +54,28 @@ class TestBasicMessage(TestCase):
         assert self.message.subject == "SubjectTest"
         assert self.message.body_html == "TextTest"
 
-    def test_ses_send_email_payload(self):
-        """Unit test for `Message.__init__(...)` success."""
-        pass
+    def test_repr(self):
+        """Test the object string representation."""
+        assert self.message.__repr__() == "<Message `test`>"
 
     def test_ses_send_email_json_schema(self):
-        """Unit test for `Message.ses_send_email_payload` success."""
-
-        # use `jsonschema.validate` to assert that payload has proper typing
+        """Use `jsonschema.validate` to ensure that payload has proper typing"""
         validate(
             instance=self.message.ses_send_email_payload,
             schema=self.ses_send_email_schema,
         )
+
+    def test_ses_send_email_payload(self):
+        """Unit test for `Message.ses_send_email_payload` success."""
+        assert self.ses_send_email_payload == self.message.ses_send_email_payload
+
+    def test_sendgrid_send_json_schema(self):
+        """Use `jsonschema.validate` to ensure that payload has proper typing"""
+        validate(
+            instance=self.message.sendgrid_send_payload,
+            schema=self.sendgrid_send_schema,
+        )
+
+    def test_sendgrid_send_payload(self):
+        """Unit test for `Message.sendgrid_send_payload` success."""
+        assert self.sendgrid_send_payload == self.message.sendgrid_send_payload

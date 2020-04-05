@@ -1,0 +1,21 @@
+{
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "leonkozlowski@gmail.com"
+        }
+      ],
+      "subject": "SubjectTest"
+    }
+  ],
+  "from": {
+    "email": "mitchbregs@gmail.com"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "value": "TextTest"
+    }
+  ]
+}

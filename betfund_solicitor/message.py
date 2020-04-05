@@ -1,5 +1,7 @@
 """Message encapsulation."""
 
+from base64 import b64encode
+from pathlib import Path
 from typing import Dict, List, Union
 
 
@@ -90,6 +92,37 @@ class Message:
         return payload
 
     @property
-    def ses_send_raw_email_payload(self):
-        """Property converting attributes to AWS SES `send_raw_email` configuration."""
-        return
+    def sendgrid_send_payload(self):
+        """Property converting attributes to SendGrid `send` configuration."""
+
+        # Minimal payload for `sendgrid.SendGridAPIClient.mail.send.post`
+        # See: https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html
+        payload = {
+            "personalizations": [
+                {
+                    "to": [{"email": recepient} for recepient in self.to],
+                    "subject": self.subject,
+                }
+            ],
+            "from": {"email": self.sender},
+            "content": [{"type": "text/html", "value": self.body_html}],
+        }
+
+        # Attach additional info on a need be basis;
+        # SendGrid API does not accept empty fields in parameters
+        if len(self.cc) > 0:
+            payload["personalizations"][0]["cc"] = [{"email": cc} for cc in self.cc]
+        if len(self.bcc) > 0:
+            payload["personalizations"][0]["bcc"] = [{"email": bcc} for bcc in self.bcc]
+        if len(self.reply_to) > 0:
+            payload["reply_to"] = [{"email": address} for address in self.reply_to]
+        if len(self.attachments) > 0:
+            payload["attachments"] = [
+                {
+                    "content": b64encode(open(attach, "rb").read()).decode(),
+                    "filename": Path(attach).name,
+                }
+                for attach in self.attachments
+            ]
+
+        return payload

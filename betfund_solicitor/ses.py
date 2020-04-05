@@ -43,7 +43,7 @@ class SimpleEmailService:
             AWS Access Key ID from AWS management console.
         aws_secret_key : str
             AWS Secret Access Key from AWS management console.
-        aws_region : str:
+        aws_region : str
             AWS Region used for Amazon SES.
         """
         if not aws_region in AWS_REGIONS:
@@ -61,6 +61,11 @@ class SimpleEmailService:
 
     def send_email(self):
         """Sends email using AWS `boto3.client.send_email` for SES.
+
+        Notes
+        -----
+        `send_email` does not handle file attachments.
+        Use `send_raw_email` if attachments are needed.
 
         Returns
         -------

@@ -1,0 +1,74 @@
+{
+  "type": "object",
+  "properties": {
+    "personalizations": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "to": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "email"
+                  ]
+                }
+              ]
+            },
+            "subject": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "to",
+            "subject"
+          ]
+        }
+      ]
+    },
+    "from": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "content": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "value"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "personalizations",
+    "from",
+    "content"
+  ]
+}
