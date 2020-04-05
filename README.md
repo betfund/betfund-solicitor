@@ -20,4 +20,4 @@ message = Message(
 ```
 
 ## Tests
-`pytest --cov=betfund_solicitor .`
+`make tests`
