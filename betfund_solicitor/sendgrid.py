@@ -43,6 +43,12 @@ class SendGrid:
         dict
             JSON response from `sendgrid.SendGridAPIClient.mail.send.post`
             representing successful email send or notifying payload errors.
+
+        Raises
+        ------
+        `python_http_client.exceptions.BedRequestsError`
+            Raised if invalid connection arguments to SendGrid API or
+            upon passing incomplete parameters to email send request.
         """
 
         # get sendgrid payload for request
