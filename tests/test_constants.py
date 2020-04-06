@@ -20,9 +20,7 @@ class TestConstants(TestCase):
         self.aws_regions = AWS_REGIONS
 
         # load AWS constants JSON
-        self.aws_regions_json = rjson(
-            "tests/constants/aws_region_constants.json"
-        )
+        self.aws_regions_json = rjson("tests/constants/aws_region_constants.json")
 
     def test_aws_regions_constant(self):
         """Unit test for to ensure AWS Regions are properly constant."""

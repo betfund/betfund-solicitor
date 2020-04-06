@@ -1,6 +1,6 @@
 # betfund-solicitor
 
-![](https://github.com/betfund/betfund-solicitor/workflows/Befund%20Solicitor/badge.svg)
+![](https://github.com/betfund/betfund-solicitor/workflows/befund-solicitor/badge.svg)
 
 Workflow to send automated emails asking for favorite line votes.
 
@@ -15,10 +15,9 @@ message = Message(
     sender='mitchbregs@gmail.com',
     to='leonkozlowski@gmail.com',
     subject='SubjectTest',
-    body_text='TextTest',
-    body_html=''
+    body_html='TextTest'
 )
 ```
 
 ## Tests
-`pytest --cov=betfund_solicitor .`
+`make tests`

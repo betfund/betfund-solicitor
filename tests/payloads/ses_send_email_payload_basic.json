@@ -1,1 +1,24 @@
-[]
+{
+  "Source": "mitchbregs@gmail.com",
+  "Destination": {
+    "ToAddresses": [
+      "leonkozlowski@gmail.com"
+    ],
+    "CcAddresses": [],
+    "BccAddresses": []
+  },
+  "Message": {
+    "Subject": {
+      "Data": "SubjectTest",
+      "Charset": "UTF-8"
+    },
+    "Body": {
+      "Html": {
+        "Data": "TextTest",
+        "Charset": "UTF-8"
+      }
+    }
+  },
+  "ReplyToAddresses": [],
+  "Tags": []
+}

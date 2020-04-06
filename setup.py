@@ -25,7 +25,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         "boto3",
-        "jsonschema"
+        "jsonschema",
+        "sendgrid"
     ],
     tests_require=[
         "black",
