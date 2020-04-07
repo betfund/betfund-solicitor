@@ -12,8 +12,8 @@ from betfund_solicitor import Message
 logger = CloudLogger(
     log_group="betfund-solicitor",
     log_stream="sendgrid",
-    aws_access_key=os.environ.get("BETFUND_AWS_ACCESS_KEY", None),
-    aws_secret_key=os.environ.get("BETFUND_AWS_SECRET_KEY", None)
+    aws_access_key=os.environ.get("BETFUND_AWS_ACCESS_KEY"),
+    aws_secret_key=os.environ.get("BETFUND_AWS_SECRET_KEY")
 )
 
 

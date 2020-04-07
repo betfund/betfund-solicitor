@@ -18,8 +18,8 @@ from betfund_solicitor.constants import AWS_REGIONS
 logger = CloudLogger(
     log_group="betfund-solicitor",
     log_stream="ses",
-    aws_access_key=os.environ.get("BETFUND_AWS_ACCESS_KEY", None),
-    aws_secret_key=os.environ.get("BETFUND_AWS_SECRET_KEY", None)
+    aws_access_key=os.environ.get("BETFUND_AWS_ACCESS_KEY"),
+    aws_secret_key=os.environ.get("BETFUND_AWS_SECRET_KEY")
 )
 
 
