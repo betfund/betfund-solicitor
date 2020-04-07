@@ -24,6 +24,7 @@ setup(
     keywords="betfund",
     packages=find_packages(),
     install_requires=[
+        "betfund_logger @ git+https://github.com/betfund/betfund-logger.git",
         "boto3",
         "jsonschema",
         "sendgrid"
@@ -31,6 +32,7 @@ setup(
     tests_require=[
         "black",
         "pylint",
-        "pytest"
+        "pytest",
+        "pytest-cov"
     ]
 )

@@ -5,11 +5,22 @@ Example:
 https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
 """
 
+import json
+import os
+
+from betfund_logger import CloudLogger
 from boto3 import client
 from botocore.exceptions import ClientError
 
 from betfund_solicitor import Message
 from betfund_solicitor.constants import AWS_REGIONS
+
+logger = CloudLogger(
+    log_group="betfund-solicitor",
+    log_stream="ses",
+    aws_access_key=os.environ.get("BETFUND_AWS_ACCESS_KEY", None),
+    aws_secret_key=os.environ.get("BETFUND_AWS_SECRET_KEY", None)
+)
 
 
 class SimpleEmailService:
@@ -80,12 +91,15 @@ class SimpleEmailService:
         """
 
         payload = self.message.ses_send_email_payload
+        logger.info("Set SES payload: {}".format(json.dumps(payload)))
 
         try:
             # try to send the email
             response = self.client.send_email(**payload)
+            logger.info("Sent email using SES: {}".format(json.dumps(response)))
         except ClientError as error:
             # raise error on client connectivity failure
+            logger.error("Error sending email via SES.")
             raise error
 
         return response
