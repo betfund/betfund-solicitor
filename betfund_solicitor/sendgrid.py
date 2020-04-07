@@ -1,9 +1,20 @@
 """SendGrid V3 API wrapper class."""
 
+import json
+import os
+
+from betfund_logger import CloudLogger
 from python_http_client.exceptions import BadRequestsError
 from sendgrid import SendGridAPIClient
 
 from betfund_solicitor import Message
+
+logger = CloudLogger(
+    log_group="betfund-solicitor",
+    log_stream="sendgrid",
+    aws_access_key=os.environ.get("BETFUND_AWS_ACCESS_KEY"),
+    aws_secret_key=os.environ.get("BETFUND_AWS_SECRET_KEY")
+)
 
 
 class SendGrid:
@@ -53,12 +64,15 @@ class SendGrid:
 
         # get sendgrid payload for request
         payload = self.message.sendgrid_send_payload
+        logger.info("Set SendGrid payload: {}".format(json.dumps(payload)))
 
         try:
             # request to send the email
             response = self.client.client.mail.send.post(request_body=payload)
+            logger.info("Sent email using SendGrid: {}".format(response.status_code))
         except BadRequestsError as error:
             # raise exception on failure
+            logger.error("Error sending email via SendGrid.")
             raise error
 
         return response
